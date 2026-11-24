@@ -25,16 +25,26 @@ with sync_playwright() as p:
             errors = []
             page.on("console", lambda m, e=errors: e.append(f"console {m.type}: {m.text}") if m.type in ("error", "warning") else None)
             page.on("pageerror", lambda ex, e=errors: e.append(f"pageerror: {ex}"))
-            page.on("requestfailed", lambda r, e=errors: e.append(f"requestfailed: {r.url}"))
+            # tiles cancelled by the map when the view jumps are normal (net::ERR_ABORTED); everything else is a problem
+            page.on("requestfailed", lambda r, e=errors: None if "ERR_ABORTED" in (r.failure or "") else e.append(f"requestfailed: {r.url} ({r.failure})"))
             page.on("response", lambda r, e=errors: e.append(f"HTTP {r.status}: {r.url}") if r.status >= 400 else None)
             tag = f"{vp_name}_{theme}"
             page.goto(BASE + "#map")
-            page.wait_for_function("document.querySelectorAll('.marker-wrap').length > 300", timeout=30000)
-            n = page.evaluate("document.querySelectorAll('.marker-wrap').length")
-            page.locator('.marker-wrap[title="Mythenquai"]').first.click()
+            page.wait_for_function("Number(document.getElementById('map').dataset.markers || 0) > 300", timeout=30000)
+            n = page.evaluate("Number(document.getElementById('map').dataset.markers)")
+            # click the Mythenquai marker on the canvas at its pixel position
+            page.evaluate("""() => { const l = zcw.locations.find(x => x.name === 'Mythenquai' && x.type === 'bike');
+                zcw.map.setView([l.lat, l.lon], 17, { animate: false }); }""")
+            page.wait_for_timeout(400)
+            xy = page.evaluate("""() => { const l = zcw.locations.find(x => x.name === 'Mythenquai' && x.type === 'bike');
+                const pt = zcw.map.latLngToContainerPoint([l.lat, l.lon]); const r = document.getElementById('map').getBoundingClientRect();
+                return [r.left + pt.x, r.top + pt.y]; }""")
+            page.mouse.click(xy[0], xy[1])
             page.wait_for_selector("#panel-detail:not([hidden])")
             page.wait_for_timeout(800)
             rain = page.inner_text("#d-rain")
+            if page.inner_text("#d-name") != "Mythenquai":
+                problems.append(f"{tag}: canvas click opened {page.inner_text('#d-name')!r} instead of Mythenquai")
             page.screenshot(path=str(OUT / f"{tag}_1_map.png"), full_page=True)
             overflow = {}
             overflow["map"] = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")

@@ -179,12 +179,14 @@ fc = {"day0": str(DAY0.date()), "scores": {m.replace("pred_", ""): {k: sc[m][k] 
 bd = root / "data" / "raw" / "boundaries"
 
 
-def to_ll(geom, step=1):
+def to_ll(geom, tol):
+    """Simplify in metres (LV95, Douglas-Peucker via shapely), then convert to lat/lon."""
+    from shapely.geometry import Polygon
     g = geom["coordinates"]
     polys = [g] if geom["type"] == "Polygon" else g
     outp = []
     for poly in polys:
-        ring = np.array(poly[0])[::step, :2]
+        ring = np.array(Polygon(np.array(poly[0])[:, :2]).simplify(tol, preserve_topology=True).exterior.coords)
         lon, lat = to_wgs.transform(ring[:, 0], ring[:, 1])
         outp.append([[round(a, 5), round(b, 5)] for a, b in zip(lat, lon)])
     return outp
@@ -192,7 +194,8 @@ def to_ll(geom, step=1):
 
 kreise = json.loads((bd / "stadtkreise.geojson").read_text(encoding="utf-8"))
 kanton = json.loads((bd / "kanton_zh.json").read_text(encoding="utf-8"))["results"][0]["geometry"]
-bnd = {"districts": [to_ll(f["geometry"], 2) for f in kreise["features"]], "canton": to_ll(kanton, 8)}
+bnd = {"districts": [to_ll(f["geometry"], 8) for f in kreise["features"]], "canton": to_ll(kanton, 40)}
+print("boundary vertices:", sum(len(r) for d in bnd["districts"] for r in d), "+", sum(len(r) for r in bnd["canton"]))
 (out / "boundaries.json").write_text(json.dumps(bnd, separators=(",", ":")))
 
 sizes = {p.name: p.stat().st_size for p in out.glob("*.json")}

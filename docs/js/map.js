@@ -8,37 +8,64 @@ import { crosshair, gridColor, htmlTooltip } from "./charts.js";
 const TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · boundaries &copy; swisstopo, City of Zurich';
 
-let map, tiles, boundaryLayer, locations, current = null, chart = null, range = 365;
+let map, tiles, boundaryLayer, renderer, locations, current = null, chart = null, range = 365;
+
+// All markers are drawn on one canvas (much faster than one DOM element per marker).
+// ShapeMarker keeps the four shapes: circle, square, diamond and triangle.
+L.Canvas.include({
+  _updateShape(layer) {
+    if (!this._drawing || layer._empty()) return;
+    const p = layer._point;
+    const ctx = this._ctx;
+    const r = Math.max(Math.round(layer._radius), 1);
+    ctx.beginPath();
+    const shape = layer.options.shape;
+    if (shape === "square") ctx.rect(p.x - r * 0.88, p.y - r * 0.88, r * 1.76, r * 1.76);
+    else if (shape === "diamond") {
+      ctx.moveTo(p.x, p.y - r * 1.2); ctx.lineTo(p.x + r * 1.2, p.y); ctx.lineTo(p.x, p.y + r * 1.2); ctx.lineTo(p.x - r * 1.2, p.y); ctx.closePath();
+    } else if (shape === "triangle") {
+      ctx.moveTo(p.x, p.y - r * 1.25); ctx.lineTo(p.x + r * 1.2, p.y + r * 0.9); ctx.lineTo(p.x - r * 1.2, p.y + r * 0.9); ctx.closePath();
+    } else ctx.arc(p.x, p.y, r, 0, Math.PI * 2, false);
+    this._fillStroke(ctx, layer);
+  },
+});
+const ShapeMarker = L.CircleMarker.extend({
+  options: { shape: "circle" },
+  _updatePath() { this._renderer._updateShape(this); },
+});
 const groups = {};
 const markers = {};
 const cache = {};
 
 function theme() { return document.documentElement.dataset.theme; }
 
-function icon(type, selected) {
-  const size = selected ? 20 : 14;
-  return L.divIcon({ className: "marker-wrap", html: shapeSVG(type, size, selected), iconSize: [24, 24], iconAnchor: [12, 12] });
+function style(type, selected) {
+  return {
+    renderer, shape: TYPES[type].shape, radius: selected ? 9 : 6, fillColor: css(TYPES[type].color), fillOpacity: 1,
+    color: css("--outline"), opacity: selected ? 1 : 0.7, weight: selected ? 2.5 : 1,
+  };
 }
 
 function drawBoundaries(b) {
   if (boundaryLayer) boundaryLayer.remove();
-  const style = { color: css("--muted"), weight: 0.8, fill: false, interactive: false };
+  const st = { renderer, color: css("--ink2"), opacity: 0.55, weight: 1.1, fill: false, interactive: false, smoothFactor: 1.5 };
   boundaryLayer = L.layerGroup([
-    ...b.districts.map((p) => L.polygon(p, style)),
-    ...b.canton.map((p) => L.polygon(p, { ...style, weight: 1.4 })),
+    ...b.districts.map((p) => L.polygon(p, st)),
+    ...b.canton.map((p) => L.polygon(p, { ...st, weight: 1.4 })),
   ]).addTo(map);
 }
 
 let boundaries;
 export async function initMap(locs) {
   locations = locs;
-  map = L.map("map", { zoomControl: true, preferCanvas: false }).fitBounds([[47.325, 8.45], [47.44, 8.62]]);
+  renderer = L.canvas({ padding: 0.5, tolerance: 8 });
+  map = L.map("map", { zoomControl: true, preferCanvas: true, renderer }).fitBounds([[47.325, 8.45], [47.44, 8.62]]);
   tiles = L.tileLayer(TILE, { attribution: ATTR, maxZoom: 19, className: "base-tiles" }).addTo(map);
   boundaries = await getJSON("data/boundaries.json");
   drawBoundaries(boundaries);
   Object.keys(TYPES).forEach((t) => { groups[t] = L.layerGroup().addTo(map); });
   locations.forEach((loc) => {
-    const m = L.marker([loc.lat, loc.lon], { icon: icon(loc.type, false), keyboard: true, title: loc.name, alt: `${TYPES[loc.type].label}: ${loc.name}` });
+    const m = new ShapeMarker([loc.lat, loc.lon], style(loc.type, false));
     const tip = document.createElement("div");
     tip.textContent = loc.name;
     m.bindTooltip(tip, { direction: "top", offset: [0, -8] });
@@ -52,12 +79,40 @@ export async function initMap(locs) {
     cb.addEventListener("change", () => { if (cb.checked) groups[t].addTo(map); else groups[t].remove(); });
   });
   drawKeys();
+  fillFinder();
+  // small hook for the automated tests (tests/ui_check.py)
+  window.zcw = { map, markers, locations };
+  document.getElementById("map").dataset.markers = String(Object.keys(markers).length);
   document.querySelectorAll("#panel-detail .range button").forEach((b) => {
     b.addEventListener("click", () => {
       range = b.dataset.range === "all" ? "all" : Number(b.dataset.range);
       document.querySelectorAll("#panel-detail .range button").forEach((x) => x.classList.toggle("on", x === b));
       if (current) drawSeries(current.loc, current.s);
     });
+  });
+}
+
+// "Find a counter": every counter in a list, so the map also works without a mouse
+function fillFinder() {
+  const sel = document.getElementById("loc-select");
+  Object.keys(TYPES).forEach((t) => {
+    const g = document.createElement("optgroup");
+    g.label = `${TYPES[t].label}s`;
+    locations.filter((l) => l.type === t).sort((a, b) => a.name.localeCompare(b.name)).forEach((l) => {
+      const o = document.createElement("option");
+      o.value = l.id;
+      o.textContent = l.name;
+      g.appendChild(o);
+    });
+    sel.appendChild(g);
+  });
+  sel.addEventListener("change", () => {
+    if (!sel.value) return;
+    const loc = locations.find((l) => l.id === sel.value);
+    const cb = document.querySelector(`.filters input[data-type="${loc.type}"]`);
+    if (!cb.checked) { cb.checked = true; groups[loc.type].addTo(map); }
+    map.setView([loc.lat, loc.lon], Math.max(map.getZoom(), 14));
+    select(loc.id);
   });
 }
 
@@ -69,7 +124,7 @@ export function mapThemeChanged() {
   if (!map) return;
   drawBoundaries(boundaries);
   drawKeys();
-  locations.forEach((l) => markers[l.id].setIcon(icon(l.type, current && current.loc.id === l.id)));
+  locations.forEach((l) => markers[l.id].setStyle(style(l.type, current && current.loc.id === l.id)));
   if (current) drawSeries(current.loc, current.s);
 }
 
@@ -77,8 +132,10 @@ export function invalidate() { if (map) map.invalidateSize(); }
 
 async function select(id) {
   const loc = locations.find((l) => l.id === id);
-  if (current) markers[current.loc.id].setIcon(icon(current.loc.type, false));
-  markers[id].setIcon(icon(loc.type, true));
+  if (current) markers[current.loc.id].setStyle(style(current.loc.type, false));
+  markers[id].setStyle(style(loc.type, true));
+  markers[id].bringToFront();
+  document.getElementById("loc-select").value = id;
   document.getElementById("panel-empty").hidden = true;
   document.getElementById("panel-detail").hidden = false;
   document.getElementById("d-type").textContent = loc.label;
@@ -139,8 +196,16 @@ function drawSeries(loc, s) {
       y: { beginAtZero: true, grid: { color: gridColor }, border: { display: false }, ticks: { color: css("--muted"), callback: (v) => num(v) } },
     },
   };
-  if (chart) chart.destroy();
-  chart = new Chart(document.getElementById("c-series"), { type: "line", data, options, plugins: [crosshair] });
+  if (chart && chart.__theme === document.documentElement.dataset.theme) {
+    // reuse the chart: replacing data and options is much cheaper than building a new chart
+    chart.data = data;
+    chart.options = options;
+    chart.update("none");
+  } else {
+    if (chart) chart.destroy();
+    chart = new Chart(document.getElementById("c-series"), { type: "line", data, options, plugins: [crosshair] });
+    chart.__theme = document.documentElement.dataset.theme;
+  }
   // table view: simple yearly averages on dry and wet days (not adjusted for season)
   const years = {};
   s.d.forEach((d, i) => {
