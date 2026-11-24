@@ -1,0 +1,26 @@
+Frozen 2026-11-24 14:12:31 +0100 before counts and weather were joined
+ba5a9370adcf3f95fa4f3e1ff8b1d4261fa2a66318d07c5af0be8234356f3438 *docs/PLAN_2026-11-24.md
+755b9226382f39156fd23955413a0a815816f01a3a934f7d5016c436acb4f63d *docs/PLAN_2026-11-24.pdf
+8adb3a7ce0cc05021cc74225d7bb9b12ac7f06199dc97642a5784d3bfddd18c6 *docs/ANALYSIS_DETAILS_2026-11-24.md
+8df051020c8c11691e44c80edd09220deb121d647b8446ec216c98d8656903bf *docs/ANALYSIS_DETAILS_2026-11-24.pdf
+7662130022328202d0fabc457c714671033861830b3ee93be601f37dd819e533 *data/derived/calendar_daily.parquet
+b7dd9f4bfd0be7242ce6b4c9b556fedf5d0ebfc5df542daa777fc5ad9f05b1e7 *data/derived/counts_daily.parquet
+1a499cf03e22af40cc7ccddf59b67b2ceb42c8a2d714db1a60ba0b2795692fcd *data/derived/weather_daily.parquet
+b85785be7c887ddc031131528ee3d11c3ed0e18ec66bdcabe5737370b6285330 *data/derived/sample_definitions.json
+6d0faa5b236852d511ccf23c786839dd644d422925a821fbe9402877c6d8d971 *data/raw/SHA256SUMS.txt
+
+Frozen 2026-11-24 14:37:17 +0100 before any forecasting model was trained
+2d5a5ccc9b3b861fe12d758bd7475c867062e189719b3411184871973bfe6083 *docs/FORECAST_DETAILS_2026-11-24.md
+b000a21f824cb15b29393fb762bef501f649d067d420d3c5421123ea3b95f2dc *docs/FORECAST_DETAILS_2026-11-24.pdf
+
+Frozen 2026-11-24 15:28:33 +0100 addendum before any neural network result
+078afae64f168a1dabf9f9ba63981080f984fdcaf21dcbfa3c6a8c3b827798e9 *docs/FORECAST_DETAILS_2026-11-24.md
+a16a8a6ceeb551fb41f9a3f735214b903ed1ee9f9fa170823ef00a4a6f37bde0 *docs/FORECAST_DETAILS_2026-11-24.pdf
+
+Frozen 2026-11-24 19:00:40 +0100 extended plan, before any weather effect on pedestrians, cars or canton counters
+40b7c6aeb3b5ddcce7b27043e2e347193e90384757d5a2aba1c157b46274b379 *docs/EXTENDED_PLAN_2026-11-24.md
+29b340bc867427874f3db6feb1c2d6dda32ab869f4254ea02a7c7561e761d5eb *docs/EXTENDED_PLAN_2026-11-24.pdf
+7ec9d081bd771179badeaf1cb1eacc5358fb592d933d3226def34b166157e5a0 *data/derived/counter_slopes.csv
+ddc7630fbbdcb915f36964547489976474fd04e99988cf30a2f2a137d445a49c *data/derived/canton_daily.parquet
+e7eb906a79b73e7f0acf7220032d9b31abd0532d468ff5514cc56efd2bc67700 *data/inventory/pedestrian_complete_days_by_location_year.csv
+6cbe3aa3dc6748f58d88b64fac6496ba477ef6435f3ec17e38d2c5398071d0c7 *data/inventory/car_full_days_by_point_year.csv

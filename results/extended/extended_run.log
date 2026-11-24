@@ -1,0 +1,15 @@
+[4s] Q1_bikes_trend: n 95945, locations 33 | trend per decade: rain +0.0599 [+0.0219, +0.0980] | cold -0.0022 [-0.0094, +0.0050] | heat -0.0054 [-0.0113, +0.0006]
+[7s] Q2_bike_vs_walk: n 76894, locations 45 | wet-day trend per decade: bike +0.0720 [-0.0289, +0.1729], walk -0.0566 [-0.1207, +0.0075], difference +0.1286 [+0.0493, +0.2079]
+[17s] Q3_canton_vs_city_exploratory: n 183268, locations 132 | wet-day trend per decade: canton -0.0951 [-0.2366, +0.0465], bike +0.0158 [-0.0666, +0.0982], difference -0.1109 [-0.2260, +0.0042]
+car points with >=2 good years in both periods: 134
+[34s] Q4_cars_periods: n 364662, points 134 | wet-day effect on cars: early -0.0149 [-0.0279, -0.0019], late -0.0136 [-0.0212, -0.0060], change +0.0012 [-0.0138, +0.0163]
+[39s] check_Q1_affoltern: n 96125, locations 33 | trend per decade: rain +0.0793 [+0.0408, +0.1177] | cold -0.0026 [-0.0110, +0.0057] | heat -0.0065 [-0.0119, -0.0011]
+[42s] check_Q2_affoltern: n 77057, locations 45 | wet-day trend per decade: bike +0.0725 [-0.0290, +0.1741], walk -0.0615 [-0.1271, +0.0042], difference +0.1340 [+0.0496, +0.2184]
+[59s] check_Q4_affoltern: n 365406, points 134 | wet-day effect on cars: early -0.0039 [-0.0164, +0.0085], late -0.0148 [-0.0221, -0.0075], change -0.0109 [-0.0254, +0.0036]
+[63s] check_Q1_no_cleaning: n 96261, locations 33 | trend per decade: rain +0.0624 [+0.0237, +0.1010] | cold -0.0028 [-0.0103, +0.0047] | heat -0.0054 [-0.0113, +0.0005]
+[67s] check_Q2_no_cleaning: n 77111, locations 45 | wet-day trend per decade: bike +0.0785 [-0.0243, +0.1812], walk -0.0578 [-0.1249, +0.0094], difference +0.1363 [+0.0579, +0.2146]
+[77s] check_Q3_no_cleaning: n 184017, locations 132 | wet-day trend per decade: canton -0.1017 [-0.2446, +0.0411], bike +0.0169 [-0.0655, +0.0993], difference -0.1186 [-0.2347, -0.0025]
+[93s] check_Q4_no_cleaning: n 364789, points 134 | wet-day effect on cars: early -0.0149 [-0.0278, -0.0019], late -0.0136 [-0.0213, -0.0060], change +0.0013 [-0.0138, +0.0163]
+[132s] check_Q4_all_points_trend: n 772852, points 224 | trend per decade: rain -0.0006 [-0.0120, +0.0109] | cold +0.0002 [-0.0020, +0.0024] | heat +0.0018 [-0.0015, +0.0052]
+done [132s]
+exit 0

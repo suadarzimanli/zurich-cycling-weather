@@ -1,0 +1,2 @@
+# Keep every file byte-identical, so the SHA-256 checksums in plans/ stay valid on all systems
+* -text

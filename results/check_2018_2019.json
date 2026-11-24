@@ -1,0 +1,23 @@
+{
+  "locations": [
+    "VZS_FISC",
+    "VZS_HARN",
+    "VZS_HARS",
+    "VZS_KLOW",
+    "VZS_LANS",
+    "VZS_LIMC",
+    "VZS_MILI",
+    "VZS_SAUM",
+    "VZS_TALS",
+    "VZS_TOED",
+    "VZS_ZOLL"
+  ],
+  "location_days": 7491,
+  "rain_2018": -0.2865235159213466,
+  "rain_2019": -0.40236512881973,
+  "change": -0.1158416128983834,
+  "ci95": [
+    -0.2053730146154043,
+    -0.026310211181362522
+  ]
+}

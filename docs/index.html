@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zurich: cycling and weather</title>
+<meta name="description" content="Has cycling in Zurich become less sensitive to rain? Fifteen years of open bicycle, pedestrian and car counts, with an interactive map, charts and forecasts.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Zurich: cycling and weather</h1>
+    <p>Has cycling in Zurich become less sensitive to rain? Fifteen years of open counting data, 2011 to 2026.</p>
+  </div>
+  <button id="themeBtn" class="theme-btn" type="button" aria-label="Switch to dark theme">Dark theme</button>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="t-map" aria-controls="tab-map" aria-selected="true" data-tab="map">Map</button>
+  <button role="tab" id="t-years" aria-controls="tab-years" aria-selected="false" data-tab="years">Rain over the years</button>
+  <button role="tab" id="t-calc" aria-controls="tab-calc" aria-selected="false" data-tab="calc">Then and now</button>
+  <button role="tab" id="t-fc" aria-controls="tab-fc" aria-selected="false" data-tab="fc">Forecasting</button>
+  <button role="tab" id="t-about" aria-controls="tab-about" aria-selected="false" data-tab="about">About</button>
+</nav>
+
+<main>
+  <!-- MAP -->
+  <section id="tab-map" class="tab active" role="tabpanel" aria-labelledby="t-map">
+    <div class="filters" role="group" aria-label="Show counters">
+      <label><input type="checkbox" data-type="bike" checked> <span class="key" data-shape="bike"></span> City bike counters <span class="n" id="n-bike"></span></label>
+      <label><input type="checkbox" data-type="walk" checked> <span class="key" data-shape="walk"></span> Pedestrian counters <span class="n" id="n-walk"></span></label>
+      <label><input type="checkbox" data-type="car" checked> <span class="key" data-shape="car"></span> Car measuring points <span class="n" id="n-car"></span></label>
+      <label><input type="checkbox" data-type="canton" checked> <span class="key" data-shape="canton"></span> Canton bike counters <span class="n" id="n-canton"></span></label>
+    </div>
+    <div class="map-layout">
+      <div id="map" role="region" aria-label="Map of counting locations"></div>
+      <aside id="panel" class="panel" aria-live="polite">
+        <div id="panel-empty">
+          <h2>Pick a counter</h2>
+          <p>Each symbol is a place where Zurich counts bicycles, pedestrians or cars automatically. Click one to see how much traffic passes there and how strongly rain affects it.</p>
+          <div class="tiles">
+            <div class="tile"><div class="tile-v">−33%</div><div class="tile-l">cyclists on a wet day, 2011–2014</div></div>
+            <div class="tile"><div class="tile-v">−29%</div><div class="tile-l">cyclists on a wet day, 2022–2026</div></div>
+          </div>
+          <p class="small">A wet day has at least 2 mm of rain between 6:00 and 20:00. Effects compare each counter with itself in the same month.</p>
+        </div>
+        <div id="panel-detail" hidden>
+          <p class="kicker" id="d-type"></p>
+          <h2 id="d-name"></h2>
+          <div class="tiles">
+            <div class="tile"><div class="tile-v" id="d-rain"></div><div class="tile-l" id="d-rain-l">on a wet day at this counter</div></div>
+            <div class="tile"><div class="tile-v" id="d-mean"></div><div class="tile-l">on an average day, 6:00–20:00</div></div>
+          </div>
+          <p class="small" id="d-period"></p>
+          <div class="range" role="group" aria-label="Time range">
+            <button type="button" data-range="365" class="on">Last year</button>
+            <button type="button" data-range="1095">Last 3 years</button>
+            <button type="button" data-range="all">All years</button>
+          </div>
+          <figure class="card">
+            <figcaption>Daily count, 6:00–20:00. Dots mark wet days.</figcaption>
+            <div class="chart-box"><canvas id="c-series" role="img" aria-label="Daily counts at the selected counter"></canvas></div>
+            <button type="button" class="table-btn" data-table="tbl-series">Show table</button>
+            <div class="table-wrap" id="tbl-series" hidden></div>
+          </figure>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- YEARS -->
+  <section id="tab-years" class="tab" role="tabpanel" aria-labelledby="t-years" hidden>
+    <div class="tiles wide">
+      <div class="tile"><div class="tile-v">−33% → −29%</div><div class="tile-l">fewer cyclists on a wet day, 2011–2014 compared with 2022–2026 (same 9 counters)</div></div>
+      <div class="tile"><div class="tile-v">4 points</div><div class="tile-l">smaller drop on wet days per decade, all 33 city counters</div></div>
+      <div class="tile"><div class="tile-v">No change</div><div class="tile-l">for walking, which did not become less sensitive to rain</div></div>
+      <div class="tile"><div class="tile-v">−1.5%</div><div class="tile-l">car traffic on a wet day, unchanged since 2012</div></div>
+    </div>
+    <figure class="card">
+      <figcaption><strong>How much does a wet day reduce traffic?</strong> Change on a wet day compared with a dry day, each year. Lines show 95% confidence intervals. The shaded years are the pandemic.</figcaption>
+      <div class="chart-box tall"><canvas id="c-modes" role="img" aria-label="Wet-day effect by year for cycling, walking and cars"></canvas></div>
+      <button type="button" class="table-btn" data-table="tbl-modes">Show table</button>
+      <div class="table-wrap" id="tbl-modes" hidden></div>
+    </figure>
+    <div class="grid3">
+      <figure class="card">
+        <figcaption><strong>Rain:</strong> cyclists on a wet day vs a dry day (%)</figcaption>
+        <div class="chart-box"><canvas id="c-rain" role="img" aria-label="Rain effect on cycling by year"></canvas></div>
+        <button type="button" class="table-btn" data-table="tbl-rain">Show table</button>
+        <div class="table-wrap" id="tbl-rain" hidden></div>
+      </figure>
+      <figure class="card">
+        <figcaption><strong>Cold:</strong> extra cyclists per degree warmer, 0 to 15 °C (%)</figcaption>
+        <div class="chart-box"><canvas id="c-cold" role="img" aria-label="Cold effect on cycling by year"></canvas></div>
+        <button type="button" class="table-btn" data-table="tbl-cold">Show table</button>
+        <div class="table-wrap" id="tbl-cold" hidden></div>
+      </figure>
+      <figure class="card">
+        <figcaption><strong>Heat:</strong> change per degree above 25 °C (%)</figcaption>
+        <div class="chart-box"><canvas id="c-heat" role="img" aria-label="Heat effect on cycling by year"></canvas></div>
+        <button type="button" class="table-btn" data-table="tbl-heat">Show table</button>
+        <div class="table-wrap" id="tbl-heat" hidden></div>
+      </figure>
+    </div>
+    <div class="card prose">
+      <h2>What was tested</h2>
+      <p>The predictions and tests were written down and locked with checksums before the counts were joined with the weather.</p>
+      <div class="table-wrap" id="tbl-tests"></div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="tab-calc" class="tab" role="tabpanel" aria-labelledby="t-calc" hidden>
+    <div class="calc">
+      <div class="card controls">
+        <h2>Pick a day</h2>
+        <fieldset>
+          <legend>Rain between 6:00 and 20:00</legend>
+          <label><input type="radio" name="rain" value="dry"> Dry (under 0.1 mm)</label>
+          <label><input type="radio" name="rain" value="light"> Light rain (0.1 to 2 mm)</label>
+          <label><input type="radio" name="rain" value="wet" checked> Wet (2 mm or more)</label>
+        </fieldset>
+        <label class="slider">Highest temperature: <strong id="v-temp">15 °C</strong>
+          <input type="range" id="in-temp" min="-5" max="35" step="1" value="15">
+        </label>
+        <label class="slider">Sunshine (6:00–20:00): <strong id="v-sun">2 hours</strong>
+          <input type="range" id="in-sun" min="0" max="14" step="0.5" value="2">
+        </label>
+        <p class="small">Compared with a reference day: dry, 20 °C and 8 hours of sunshine.</p>
+      </div>
+      <div class="card">
+        <div class="tiles">
+          <div class="tile"><div class="tile-v" id="o-early"></div><div class="tile-l">cyclists in 2011–2014</div><div class="tile-ci" id="o-early-ci"></div></div>
+          <div class="tile"><div class="tile-v" id="o-late"></div><div class="tile-l">cyclists in 2022–2026</div><div class="tile-ci" id="o-late-ci"></div></div>
+        </div>
+        <figure>
+          <figcaption>Expected change compared with the reference day, with 95% confidence intervals</figcaption>
+          <div class="chart-box short"><canvas id="c-calc" role="img" aria-label="Expected change in cyclists for the chosen day"></canvas></div>
+        </figure>
+        <p id="o-diff" class="small"></p>
+        <p class="small">Based on the 9 city counters observed in both periods. The model compares each counter with itself in the same month, so the numbers describe the effect of the weather alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORECAST -->
+  <section id="tab-fc" class="tab" role="tabpanel" aria-labelledby="t-fc" hidden>
+    <div class="card prose">
+      <h2>Forecasting tomorrow's bike traffic</h2>
+      <p>Each evening, the models forecast the next day's bike count at 19 city counters. They were trained on data up to May 2025 and tested from 1 June 2025 to 22 November 2026. The simplest forecast is "the same weekday last week". The graph neural network (Graph WaveNet) also uses the network of nearby counters.</p>
+    </div>
+    <figure class="card">
+      <figcaption><strong>Forecast error compared with "same weekday last week"</strong> (lower is better, 1.0 = no improvement)</figcaption>
+      <div class="chart-box"><canvas id="c-scores" role="img" aria-label="Forecast error of each model"></canvas></div>
+      <button type="button" class="table-btn" data-table="tbl-scores">Show table</button>
+      <div class="table-wrap" id="tbl-scores" hidden></div>
+      <p class="small">"With weather" uses the observed weather of the target day, which is the best possible case. Real weather forecasts would land between the two versions.</p>
+    </figure>
+    <figure class="card">
+      <div class="fc-controls">
+        <label>Counter <select id="fc-node"></select></label>
+        <label>Weather <select id="fc-wx"><option value="wx">Tomorrow's weather known</option><option value="nowx">Not known</option></select></label>
+        <div class="range" role="group" aria-label="Time range">
+          <button type="button" data-fcrange="120" class="on">Last 120 days</button>
+          <button type="button" data-fcrange="all">Whole test period</button>
+        </div>
+      </div>
+      <figcaption>Actual count and forecasts, 6:00–20:00. Click a legend entry to hide or show a model.</figcaption>
+      <div class="chart-box tall"><canvas id="c-fc" role="img" aria-label="Actual and forecast bike counts"></canvas></div>
+    </figure>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="tab-about" class="tab" role="tabpanel" aria-labelledby="t-about" hidden>
+    <div class="card prose">
+      <h2>What we found</h2>
+      <ul>
+        <li><strong>Rain matters a little less than it used to.</strong> At the 9 city counters observed in both periods, a wet day cut daytime cycling by 33% in 2011–2014 and by 29% in 2022–2026. Across all 33 city counters, the rain effect weakens by about 4 percentage points per decade.</li>
+        <li><strong>The change is specific to cycling.</strong> Over the same years, walking did not become less sensitive to rain.</li>
+        <li><strong>E-bikes do not look like the main reason.</strong> Cold and heat effects did not shrink more than the rain effect, and the change is not larger in the suburbs, where e-bikes help most.</li>
+        <li><strong>Rainy days do not bring more cars.</strong> Car traffic is about 1.5% lower on wet days, and this has not changed since 2012.</li>
+        <li><strong>Rain still matters a lot.</strong> Cycling in Zurich is becoming somewhat more robust to rain, but it is far from weather-proof.</li>
+      </ul>
+      <h2>How it was done</h2>
+      <p>Daily counts between 6:00 and 20:00 are modelled with a Poisson regression. Each counter is compared with itself within the same month, with separate levels for each weekday and for holidays, so the weather effect comes from day-to-day changes in weather. Standard errors allow for correlation within each week. The plan, the predictions and the exact tests were locked with checksums before the counts were joined with the weather. Several checks were run: a second weather station, no data cleaning, and the replacement of counting devices.</p>
+      <h2>Data</h2>
+      <ul class="sources">
+        <li>Bicycle and pedestrian counts: <a href="https://data.stadt-zuerich.ch/dataset/ted_taz_verkehrszaehlungen_werte_fussgaenger_velo">City of Zurich, Tiefbauamt</a> (CC0)</li>
+        <li>Car counts: <a href="https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031">City of Zurich, Dienstabteilung Verkehr</a> (CC0)</li>
+        <li>Canton bike counts: <a href="https://www.zh.ch/de/politik-staat/statistik-daten/datenkatalog.html#/datasets/3062@tiefbauamt-kanton-zuerich">Tiefbauamt Kanton Zürich</a> (open government data)</li>
+        <li>Weather: <a href="https://opendatadocs.meteoswiss.ch/a-data-groundbased/a1-automatic-weather-stations">MeteoSwiss</a>, ten-minute values (source: MeteoSwiss)</li>
+        <li>School holidays: <a href="https://data.stadt-zuerich.ch/dataset/ssd_schulferien">City of Zurich, Schulamt</a> (CC0)</li>
+        <li>Boundaries: <a href="https://www.swisstopo.admin.ch/">swisstopo</a> and City of Zurich. Base map: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</li>
+      </ul>
+      <h2>Paper and code</h2>
+      <p>The full paper will be posted as a preprint soon. The analysis code, the locked plans and their checksums are in the <a id="repo-link" href="https://github.com/suadarzimanli/zurich-cycling-weather">GitHub repository</a>.</p>
+      <p class="small">Author: Suad Arzimanli, University of Łódź. Analysis data downloaded on 24 November 2026.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Data: City of Zurich, Canton of Zurich, MeteoSwiss, swisstopo. Base map © OpenStreetMap contributors.</span>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

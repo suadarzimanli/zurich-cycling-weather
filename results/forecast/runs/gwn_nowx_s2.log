@@ -1,0 +1,14 @@
+training days per location: {'VZS_BER2': 701, 'VZS_BUCH': 1215, 'VZS_HARN': 1215, 'VZS_HARS': 1215, 'VZS_HOFW': 1146, 'VZS_LAFN': 1215, 'VZS_LAFS': 1215, 'VZS_LANN': 1215, 'VZS_LANS': 1153, 'VZS_LIMC': 1086, 'VZS_LUXG': 1214, 'VZS_MILI': 1185, 'VZS_MUEH': 1154, 'VZS_MYTH': 969, 'VZS_SCHE': 1203, 'VZS_SIHL': 1016, 'VZS_TANN': 586, 'VZS_TOED': 874, 'VZS_TUNS': 0}
+scaled with pre-test data instead of training data: ['VZS_TUNS']
+nodes 19 | days 1787 | train/val/test targets {'train': 1188, 'val': 31, 'test': 540}
+epoch 0 val 0.4130 best 0.4130 [160s]
+epoch 10 val 0.3986 best 0.3824 [1284s]
+epoch 20 val 0.4014 best 0.3702 [2337s]
+epoch 30 val 0.3755 best 0.3675 [3081s]
+epoch 40 val 0.3661 best 0.3661 [3593s]
+epoch 50 val 0.3883 best 0.3564 [4058s]
+epoch 60 val 0.3608 best 0.3482 [4517s]
+epoch 70 val 0.3572 best 0.3482 [4977s]
+epoch 80 val 0.3636 best 0.3416 [5452s]
+epoch 90 val 0.3510 best 0.3416 [5874s]
+done pred_gwn_nowx_s2 {'val_mae_scaled': 0.3416087329387665, 'epochs': 93, 'seconds': 5953}

@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "Is cycling in Zurich becoming weather-proof? Fifteen years of bicycle, pedestrian and car counts"
+message: "If you use this software, data or study, please cite it as below."
+type: software
+authors:
+  - family-names: Arzimanli
+    given-names: Suad
+    affiliation: "University of Łódź"
+version: 1.0.0
+date-released: 2026-11-24
+license: MIT
+repository-code: "https://github.com/suadarzimanli/zurich-cycling-weather"
+url: "https://suadarzimanli.github.io/zurich-cycling-weather/"
+keywords:
+  - cycling
+  - weather
+  - rain
+  - bicycle counts
+  - Zurich
+  - Poisson regression
+  - graph neural networks
+  - forecasting

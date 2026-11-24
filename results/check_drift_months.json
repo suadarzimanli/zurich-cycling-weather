@@ -1,0 +1,31 @@
+{
+  "locations": [
+    "VZS_BUCH",
+    "VZS_HOFW",
+    "VZS_LANN",
+    "VZS_LIMC",
+    "VZS_LUXG",
+    "VZS_MILI",
+    "VZS_MUEH",
+    "VZS_MYTH",
+    "VZS_SCHE",
+    "VZS_SIHL",
+    "VZS_TOED"
+  ],
+  "n_wet": 912,
+  "n_dry": 3573,
+  "old_model_2011_2015": {
+    "within_month_wet_minus_dry": -0.056750028512199686,
+    "ci95": [
+      -0.10036407875804566,
+      0.004519621076458798
+    ]
+  },
+  "full_model_reference": {
+    "within_month_wet_minus_dry": 0.030115564350245504,
+    "ci95": [
+      -0.01615274389884486,
+      0.08645262770413392
+    ]
+  }
+}

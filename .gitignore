@@ -1,0 +1,8 @@
+# Raw and intermediate data are downloaded and rebuilt by the scripts in analysis/
+# (only the top-level data folder; docs/data holds the web app's data and is tracked)
+/data/
+/paper/
+/tests/screens/
+__pycache__/
+*.pyc
+.DS_Store

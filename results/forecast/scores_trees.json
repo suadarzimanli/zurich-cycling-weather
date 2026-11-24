@@ -1,0 +1,64 @@
+{
+  "eval_rows": 9594,
+  "locations": 19,
+  "days": 540,
+  "pred_lastweek": {
+    "mae": 326.1306024598708,
+    "mae_ratio": 1.0,
+    "dm_mean_diff": 0.0,
+    "dm_t": NaN,
+    "dm_p": NaN,
+    "days": 540
+  },
+  "pred_lgbm_wx": {
+    "mae": 162.25331609921702,
+    "mae_ratio": 0.4975102455133193,
+    "dm_mean_diff": -163.77420536853714,
+    "dm_t": -10.153484628475693,
+    "dm_p": 3.1973859896459905e-24,
+    "days": 540
+  },
+  "pred_lgbm_nowx": {
+    "mae": 221.40677042835972,
+    "mae_ratio": 0.6788898949021598,
+    "dm_mean_diff": -104.23754656189139,
+    "dm_t": -6.654689776995851,
+    "dm_p": 2.8389822062004947e-11,
+    "days": 540
+  },
+  "drift": {
+    "old_model_2011_2015": {
+      "wet_minus_dry": -0.07698422742829868,
+      "ci95": [
+        -0.130264226189971,
+        -0.020361743843288944
+      ],
+      "mean_rel_error_wet": -0.15241062344486417,
+      "mean_rel_error_dry": -0.07542639601656549
+    },
+    "full_model_reference": {
+      "wet_minus_dry": 0.01410517995349777,
+      "ci95": [
+        -0.035432288427760174,
+        0.06992304403690058
+      ],
+      "mean_rel_error_wet": 0.007584510624566965,
+      "mean_rel_error_dry": -0.006520669328930803
+    },
+    "n_wet": 912,
+    "n_dry": 3573,
+    "locations": [
+      "VZS_BUCH",
+      "VZS_HOFW",
+      "VZS_LANN",
+      "VZS_LIMC",
+      "VZS_LUXG",
+      "VZS_MILI",
+      "VZS_MUEH",
+      "VZS_MYTH",
+      "VZS_SCHE",
+      "VZS_SIHL",
+      "VZS_TOED"
+    ]
+  }
+}
