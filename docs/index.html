@@ -76,9 +76,9 @@
   <section id="tab-years" class="tab" role="tabpanel" aria-labelledby="t-years" hidden>
     <div class="tiles wide">
       <div class="tile"><div class="tile-v">−33% → −29%</div><div class="tile-l">fewer cyclists on a wet day, 2011–2014 compared with 2022–2026 (same 9 counters)</div></div>
-      <div class="tile"><div class="tile-v">4 points</div><div class="tile-l">smaller drop on wet days per decade, all 33 city counters</div></div>
+      <div class="tile"><div class="tile-v">4 points</div><div class="tile-l">smaller drop on wet days per decade on average, all 33 city counters. Most of the change came by 2017</div></div>
       <div class="tile"><div class="tile-v">No change</div><div class="tile-l">for walking, which did not become less sensitive to rain</div></div>
-      <div class="tile"><div class="tile-v">−1.5%</div><div class="tile-l">car traffic on a wet day, unchanged since 2012</div></div>
+      <div class="tile"><div class="tile-v">−1.5%</div><div class="tile-l">car traffic on a wet day, unchanged since 2012, with no rise outside rush hours</div></div>
     </div>
     <figure class="card">
       <figcaption><strong>How much does a wet day reduce traffic?</strong> Change on a wet day compared with a dry day, each year. Lines show 95% confidence intervals. The shaded years are the pandemic.</figcaption>
@@ -179,26 +179,29 @@
     <div class="card prose">
       <h2>What we found</h2>
       <ul>
-        <li><strong>Rain matters a little less than it used to.</strong> At the 9 city counters observed in both periods, a wet day cut daytime cycling by 33% in 2011–2014 and by 29% in 2022–2026. Across all 33 city counters, the rain effect weakens by about 4 percentage points per decade.</li>
+        <li><strong>Rain matters a little less than it used to.</strong> At the 9 city counters observed in both periods, a wet day cut daytime cycling by 33% in 2011–2014 and by 29% in 2022–2026. Across all 33 city counters, the rain effect weakened by about 4 percentage points per decade on average. The change was not steady. Most of it came by 2017, and since then a wet day has cut cycling by about a quarter, so the average rate is not a forecast.</li>
         <li><strong>The change is specific to cycling.</strong> Over the same years, walking did not become less sensitive to rain.</li>
         <li><strong>E-bikes do not look like the main reason.</strong> Cold and heat effects did not shrink more than the rain effect, and the change is not larger in the suburbs, where e-bikes help most.</li>
-        <li><strong>Rainy days do not bring more cars.</strong> Car traffic is about 1.5% lower on wet days, and this has not changed since 2012.</li>
+        <li><strong>The change is largest on routes with much weekend traffic.</strong> On these leisure-type routes the rain effect weakened two to three times as fast as on commuter-type routes, and still about twice as fast when measured against their stronger starting level. This fits occasional riders becoming less put off by rain, but the counts cannot prove it.</li>
+        <li><strong>Rainy days do not bring more cars.</strong> Car traffic is about 1.5% lower on wet days, and this has not changed since 2012. It does not rise outside rush hours either, when the roads have room for more cars.</li>
+        <li><strong>Public transport held steady at one hub.</strong> At the Hardbrücke stop, passenger flows on wet days were about 1% higher than on dry days, within the margin of error, while cycling on the same bridge fell by a quarter. This check covers one stop from 2024 to 2026.</li>
         <li><strong>Rain still matters a lot.</strong> Cycling in Zurich is becoming somewhat more robust to rain, but it is far from weather-proof.</li>
       </ul>
       <h2>How it was done</h2>
-      <p>Daily counts between 6:00 and 20:00 are modelled with a Poisson regression. Each counter is compared with itself within the same month, with separate levels for each weekday and for holidays, so the weather effect comes from day-to-day changes in weather. Standard errors allow for correlation within each week. The plan, the predictions and the exact tests were locked with checksums before the counts were joined with the weather. Several checks were run: a second weather station, no data cleaning, and the replacement of counting devices.</p>
+      <p>Daily counts between 6:00 and 20:00 are modelled with a Poisson regression. Each counter is compared with itself within the same month, with separate levels for each weekday and for holidays, so the weather effect comes from day-to-day changes in weather. Standard errors allow for correlation within each week. The plan, the predictions and the exact tests were locked with checksums before the counts were joined with the weather. The planned checks used a second weather station and the data without cleaning. Further checks were added after the results and are marked as such in the paper and the repository. They test the replacement of counting devices, whether rainy days became milder, the hours and timing of rain, wind, car traffic outside rush hours, the type of route, and public transport at one stop.</p>
       <h2>Data</h2>
       <ul class="sources">
         <li>Bicycle and pedestrian counts: <a href="https://data.stadt-zuerich.ch/dataset/ted_taz_verkehrszaehlungen_werte_fussgaenger_velo">City of Zurich, Tiefbauamt</a> (CC0)</li>
         <li>Car counts: <a href="https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031">City of Zurich, Dienstabteilung Verkehr</a> (CC0)</li>
+        <li>Public transport counts at Hardbrücke: <a href="https://data.stadt-zuerich.ch/dataset/vbz_frequenzen_hardbruecke">City of Zurich, Verkehrsbetriebe Zürich</a> (CC0)</li>
         <li>Canton bike counts: <a href="https://www.zh.ch/de/politik-staat/statistik-daten/datenkatalog.html#/datasets/3062@tiefbauamt-kanton-zuerich">Tiefbauamt Kanton Zürich</a> (open government data)</li>
         <li>Weather: <a href="https://opendatadocs.meteoswiss.ch/a-data-groundbased/a1-automatic-weather-stations">MeteoSwiss</a>, ten-minute values (source: MeteoSwiss)</li>
         <li>School holidays: <a href="https://data.stadt-zuerich.ch/dataset/ssd_schulferien">City of Zurich, Schulamt</a> (CC0)</li>
         <li>Boundaries: <a href="https://www.swisstopo.admin.ch/">swisstopo</a> and City of Zurich. Base map: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</li>
       </ul>
       <h2>Paper and code</h2>
-      <p>The full paper will be posted as a preprint soon. The analysis code, the locked plans and their checksums are in the <a id="repo-link" href="https://github.com/suadarzimanli/zurich-cycling-weather">GitHub repository</a>.</p>
-      <p class="small">Author: Suad Arzimanli, University of Łódź. Analysis data downloaded on 24 November 2026.</p>
+      <p>A paper describing the study is being prepared for a peer-reviewed journal. The analysis code, the locked plans and their checksums are in the <a id="repo-link" href="https://github.com/suadarzimanli/zurich-cycling-weather">GitHub repository</a>.</p>
+      <p class="small">Author: Suad Arzimanli, University of Łódź. Analysis data downloaded on 24 November 2026, public transport counts on 25 November 2026.</p>
     </div>
   </section>
 </main>

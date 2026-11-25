@@ -27,3 +27,6 @@ e7eb906a79b73e7f0acf7220032d9b31abd0532d468ff5514cc56efd2bc67700 *data/inventory
 
 Frozen 2026-11-25 11:53:47 +0100 check added after the results, before it was run (route type)
 c3df0ec836a21f152d7736d9ba31e5e6745aa4617309b52863ceaa3fdf3abdfb *docs/CHECK_ROUTE_TYPE_2026-11-25.md
+
+Frozen 2026-11-25 16:15:59 +0100 check added after the results, before it was run (cars off-peak, route-type gap in proportional terms)
+b49879b5af87ba49a31540328096274920b73c15d706cd898fe56eb07ae295f3 *docs/CHECK_OFFPEAK_PROPORTIONAL_2026-11-25.md

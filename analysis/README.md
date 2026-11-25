@@ -32,3 +32,5 @@ Every script takes the repository folder as its only argument, for example `pyth
 | `28_pt_hardbruecke.py` | Check added after the results: public transport flows at the stop Hardbrücke on wet days, with the two Hardbrücke bicycle counters |
 | `29_route_type.py` | Check added after the results, rule fixed in `plans/CHECK_ROUTE_TYPE_2026-11-25.md` before it was run: rain trend on commuter-type and leisure-type routes |
 | `30_route_type_followup.py` | Diagnostics run after seeing the result of `29_route_type.py`: one location dropped at a time, weekend ratio by period |
+| `31_route_type_proportional.py` | Check added after the results, rule fixed in `plans/CHECK_OFFPEAK_PROPORTIONAL_2026-11-25.md` before it was run: the route-type gap in proportional terms |
+| `32_cars_offpeak.py` | Check added after the results, same rule file: car traffic on wet days outside the peak hours and in the rush hours |

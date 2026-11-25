@@ -8,6 +8,10 @@ are demeaned within each location by weighted alternating projections over fe1 a
 and the local coefficients are concentrated out with a Schur complement.
 Standard errors for b are cluster-robust with a G/(G-1) correction, using the regressors
 after removing fixed effects and local regressors (Frisch-Waugh).
+
+With full=True the function also returns the local coefficients of every location and the
+cluster-robust covariance of all coefficients, global and local (added 25 Nov 2026 for the
+proportional route-type check). Its global block equals the default covariance.
 """
 import numpy as np
 import pandas as pd
@@ -51,7 +55,7 @@ class _Block:
         raise RuntimeError("demeaning did not converge")
 
 
-def blockpois(y, G, L, loc, fe1, fe2, clusters, names=None, maxit=200, tol=1e-10):
+def blockpois(y, G, L, loc, fe1, fe2, clusters, names=None, maxit=200, tol=1e-10, full=False, local_names=None):
     y = np.asarray(y, float)
     G = np.asarray(G, float)
     L = None if L is None else np.asarray(L, float)
@@ -64,7 +68,7 @@ def blockpois(y, G, L, loc, fe1, fe2, clusters, names=None, maxit=200, tol=1e-10
     cl = pd.factorize(np.asarray(clusters)[keep])[0]
     n, kg = G.shape
     kl = 0 if L is None else L.shape[1]
-    lc = pd.factorize(loc)[0]
+    lc, loc_names = pd.factorize(loc)
     order = np.argsort(lc, kind="stable")
     bounds = np.searchsorted(lc[order], np.arange(lc.max() + 2))
     blocks = [_Block(order[bounds[i]:bounds[i + 1]], c1[order[bounds[i]:bounds[i + 1]]], c2[order[bounds[i]:bounds[i + 1]]])
@@ -108,12 +112,14 @@ def blockpois(y, G, L, loc, fe1, fe2, clusters, names=None, maxit=200, tol=1e-10
         S, r, store = solve_step(w, z)
         bg = np.linalg.solve(S, r)
         e = np.empty(n)
+        bls = []
         for b, st in zip(blocks, store):
             res = b.zt - b.Gt @ bg
             if kl:
                 Ainv, B, c = st
                 bl = Ainv @ (c - B.T @ bg)
                 res -= b.Lt @ bl
+                bls.append(bl)
             e[b.idx] = res
         eta = z - e
         mu = np.exp(eta)
@@ -140,5 +146,30 @@ def blockpois(y, G, L, loc, fe1, fe2, clusters, names=None, maxit=200, tol=1e-10
     Sinv = np.linalg.inv(S)
     V = Sinv @ (scores.T @ scores) @ Sinv * C / (C - 1)
     names = names if names is not None else list(range(kg))
-    return {"beta": pd.Series(bg, index=names), "vcov": pd.DataFrame(V, index=names, columns=names),
-            "n": n, "clusters": C, "locations": len(blocks), "iterations": it + 1, "deviance": dev}
+    out = {"beta": pd.Series(bg, index=names), "vcov": pd.DataFrame(V, index=names, columns=names),
+           "n": n, "clusters": C, "locations": len(blocks), "iterations": it + 1, "deviance": dev}
+    if full and kl:
+        # sandwich over all coefficients: global first, then the local ones location by location
+        nb = len(blocks)
+        K = kg + nb * kl
+        H = np.zeros((K, K))
+        sc = np.zeros((C, K))
+        for j, b in enumerate(blocks):
+            wi = w[b.idx]
+            Gt, Lt = b.Gt, b.Lt
+            sl = slice(kg + j * kl, kg + (j + 1) * kl)
+            H[:kg, :kg] += (Gt * wi[:, None]).T @ Gt
+            H[:kg, sl] = (Gt * wi[:, None]).T @ Lt
+            H[sl, :kg] = H[:kg, sl].T
+            H[sl, sl] = (Lt * wi[:, None]).T @ Lt
+            u = (y[b.idx] - mu[b.idx])[:, None]
+            np.add.at(sc[:, :kg], cl[b.idx], Gt * u)
+            np.add.at(sc[:, sl], cl[b.idx], Lt * u)
+        Hinv = np.linalg.pinv(H)
+        Vf = Hinv @ (sc.T @ sc) @ Hinv * C / (C - 1)
+        lnames = local_names if local_names is not None else list(range(kl))
+        full_names = list(names) + [f"{loc_names[j]}:{v}" for j in range(nb) for v in lnames]
+        out["beta_local"] = pd.DataFrame(np.vstack(bls), index=list(loc_names), columns=lnames)
+        out["beta_full"] = pd.Series(np.concatenate([bg] + bls), index=full_names)
+        out["vcov_full"] = pd.DataFrame(Vf, index=full_names, columns=full_names)
+    return out
