@@ -24,3 +24,6 @@ Frozen 2026-11-24 19:00:40 +0100 extended plan, before any weather effect on ped
 ddc7630fbbdcb915f36964547489976474fd04e99988cf30a2f2a137d445a49c *data/derived/canton_daily.parquet
 e7eb906a79b73e7f0acf7220032d9b31abd0532d468ff5514cc56efd2bc67700 *data/inventory/pedestrian_complete_days_by_location_year.csv
 6cbe3aa3dc6748f58d88b64fac6496ba477ef6435f3ec17e38d2c5398071d0c7 *data/inventory/car_full_days_by_point_year.csv
+
+Frozen 2026-11-25 11:53:47 +0100 check added after the results, before it was run (route type)
+c3df0ec836a21f152d7736d9ba31e5e6745aa4617309b52863ceaa3fdf3abdfb *docs/CHECK_ROUTE_TYPE_2026-11-25.md

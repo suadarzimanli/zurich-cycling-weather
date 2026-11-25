@@ -42,6 +42,10 @@ files = {
         "&layers=all:ch.bafu.vec25-seen&tolerance=0&mapExtent=2680000,1230000,2700000,1250000&imageDisplay=1000,1000,96"
         "&sr=2056&returnGeometry=true&geometryFormat=geojson",
 }
+# passenger counts at the VBZ stop Hardbrücke (check added after the results, code/28_pt_hardbruecke.py)
+for y in (2024, 2025, 2026):
+    files[f"vbz_hardbruecke/frequenzen_hardbruecke_{y}.parquet"] = (
+        f"{ZH}/vbz_frequenzen_hardbruecke/download/frequenzen_hardbruecke_{y}.parquet")
 for st in ("sma", "reh", "chz", "klo", "lac", "pfa", "scm", "sha", "tae", "wae"):
     parts = ["t_historical_2020-2029", "t_recent"] + ([] if st == "pfa" else ["t_historical_2010-2019"])
     for part in parts:

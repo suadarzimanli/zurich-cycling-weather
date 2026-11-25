@@ -13,6 +13,8 @@ Fifteen years of open bicycle, pedestrian and car counts from Zurich, Switzerlan
 | Is the change specific to cycling? | Yes. Over 2014–2022, walking did not become less sensitive to rain (cycling minus walking +0.129 log points per decade, 95% CI +0.049 to +0.208). |
 | Do e-bikes explain it? | Not on this evidence. Cold and heat effects did not shrink more than the rain effect, and the change is not larger at the canton counters outside the city. |
 | Do rainy days bring more cars? | No. Car traffic is about **1.5% lower** on wet days, and this has not changed since 2012. |
+| Where did the change happen? | Check added after the results: mostly on routes with much weekend traffic (rain effect weakening +0.108 log points per decade, against +0.038 on commuter-type routes, difference 95% CI -0.094 to -0.046). |
+| What happens to public transport on wet days? | Check added after the results, one stop (Hardbrücke, 2024–2026): tram and bus flows +1.2% (95% CI -0.3% to +2.6%) while cycling on the same bridge falls by 25%. |
 | Can tomorrow's bike traffic be forecast? | A graph neural network (Graph WaveNet) has 59% less error than "same weekday last week" when tomorrow's weather is known, and 24% less error than the same network without the counter graph. |
 
 Rain still removes almost a third of daytime cycling in Zurich. The decline in rain sensitivity is real and specific to cycling, but it is slow.
@@ -27,10 +29,11 @@ All data are open. Nothing is redistributed here except derived results. `analys
 | Car counts, hourly, 2012–2026 | [City of Zurich, Dienstabteilung Verkehr](https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031) | CC0 |
 | Canton bicycle counts, hourly, 2016–2025 | [Tiefbauamt Kanton Zürich](https://www.zh.ch/de/politik-staat/statistik-daten/datenkatalog.html#/datasets/3062@tiefbauamt-kanton-zuerich) | Open government data |
 | Weather, ten-minute values | [MeteoSwiss](https://opendatadocs.meteoswiss.ch/a-data-groundbased/a1-automatic-weather-stations) | Open use, source: MeteoSwiss |
+| Passenger counts at the stop Hardbrücke, 5-minute values, 2024–2026 | [City of Zurich, VBZ](https://data.stadt-zuerich.ch/dataset/vbz_frequenzen_hardbruecke) | CC0 |
 | School holidays | [City of Zurich, Schulamt](https://data.stadt-zuerich.ch/dataset/ssd_schulferien) | CC0 |
 | Boundaries, roads, elevation | [swisstopo](https://api3.geo.admin.ch/) and City of Zurich | Open use |
 
-The data were downloaded on 24 November 2026. The sources are updated daily, so a new download will differ slightly. Checksums of the analysed version are in `plans/SHA256SUMS.txt` and `plans/SHA256SUMS_extended.txt`.
+The data were downloaded on 24 November 2026, and the Hardbrücke passenger counts on 25 November 2026. The sources are updated daily, so a new download will differ slightly. Checksums of the analysed version are in `plans/SHA256SUMS.txt` and `plans/SHA256SUMS_extended.txt`.
 
 ## Method in short
 

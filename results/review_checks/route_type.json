@@ -1,0 +1,103 @@
+{
+  "median_weekend_ratio": 0.5644822554324197,
+  "n": 95945,
+  "locations": 33,
+  "groups": {
+    "commuter": [
+      "VZS_BASL",
+      "VZS_BUCH",
+      "VZS_FLOE",
+      "VZS_HARN",
+      "VZS_HARS",
+      "VZS_HOFW",
+      "VZS_LAFN",
+      "VZS_LANN",
+      "VZS_LANS",
+      "VZS_MILI",
+      "VZS_MUEH",
+      "VZS_SAUM",
+      "VZS_SCHE",
+      "VZS_SIHL",
+      "VZS_TANN",
+      "VZS_TOED",
+      "VZS_ZEUG"
+    ],
+    "leisure": [
+      "VZS_ANDR",
+      "VZS_BER2",
+      "VZS_BERT",
+      "VZS_BINZ",
+      "VZS_FISC",
+      "VZS_KLOW",
+      "VZS_LAFS",
+      "VZS_LIMB",
+      "VZS_LIMC",
+      "VZS_LUXG",
+      "VZS_MYTH",
+      "VZS_SCHU",
+      "VZS_TALS",
+      "VZS_TUNN",
+      "VZS_TUNS",
+      "VZS_ZOLL"
+    ]
+  },
+  "weekend_ratio": {
+    "VZS_ANDR": 0.6093763161692615,
+    "VZS_BASL": 0.4877855188530527,
+    "VZS_BER2": 0.6502814009051048,
+    "VZS_BERT": 0.6333805972619246,
+    "VZS_BINZ": 0.5657295449149898,
+    "VZS_BUCH": 0.4526686257374227,
+    "VZS_FISC": 1.3380122119052604,
+    "VZS_FLOE": 0.4877508602443771,
+    "VZS_HARN": 0.5385603242715838,
+    "VZS_HARS": 0.5581305444127255,
+    "VZS_HOFW": 0.4790914461240383,
+    "VZS_KLOW": 1.8824964186928206,
+    "VZS_LAFN": 0.5440345863548104,
+    "VZS_LAFS": 0.587671046647288,
+    "VZS_LANN": 0.5608330593215842,
+    "VZS_LANS": 0.5644822554324197,
+    "VZS_LIMB": 0.5919629526923393,
+    "VZS_LIMC": 0.5795291899360451,
+    "VZS_LUXG": 0.642400734469751,
+    "VZS_MILI": 0.4950725902391781,
+    "VZS_MUEH": 0.4655490789746595,
+    "VZS_MYTH": 0.9056652024747316,
+    "VZS_SAUM": 0.5452226478182972,
+    "VZS_SCHE": 0.31078971482325507,
+    "VZS_SCHU": 0.7192726465575329,
+    "VZS_SIHL": 0.48375241641243627,
+    "VZS_TALS": 0.6056257626985112,
+    "VZS_TANN": 0.48384751363818435,
+    "VZS_TOED": 0.41426619160021716,
+    "VZS_TUNN": 0.6789135866424586,
+    "VZS_TUNS": 0.5962253008801869,
+    "VZS_ZEUG": 0.5623209154332413,
+    "VZS_ZOLL": 0.5774683171204975
+  },
+  "rain_trend_commuter": {
+    "est": 0.03794042929246776,
+    "se": 0.019822183465686965,
+    "ci95": [
+      -0.0009110503002786874,
+      0.07679190888521421
+    ]
+  },
+  "rain_trend_leisure": {
+    "est": 0.10804686621655503,
+    "se": 0.021199796811282118,
+    "ci95": [
+      0.06649526446644208,
+      0.14959846796666798
+    ]
+  },
+  "rain_trend_commuter_minus_leisure": {
+    "est": -0.07010643692408727,
+    "se": 0.012233423192664237,
+    "ci95": [
+      -0.09408394638170918,
+      -0.046128927466465366
+    ]
+  }
+}
