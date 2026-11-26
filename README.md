@@ -9,7 +9,8 @@ Fifteen years of open bicycle, pedestrian and car counts from Zurich, Switzerlan
 
 | Question | Result |
 |---|---|
-| Has cycling become less sensitive to rain? | Yes. At the 9 city counters observed in both periods, a wet day cut daytime cycling by **33%** in 2011–2014 and by **29%** in 2022–2026 (change +0.068 log points, 95% CI +0.021 to +0.115). Across all 33 counters the drop shrinks by about **4 percentage points per decade**. |
+| Has cycling become less sensitive to rain? | Yes. At the 9 city counters observed in both periods, a wet day cut daytime cycling by **33%** in 2011–2014 and by **29%** in 2022–2026 (change +0.068 log points, 95% CI +0.021 to +0.115). Across all 33 counters the drop shrank by about **4 percentage points per decade** on average, most of it by 2017. |
+| How much did cycling grow? | At the same 9 counters, daytime cycling grew by **81%** (613 to 1,110 cyclists per counter and day), and cycling on wet days roughly **doubled** (389 to 789). Simple averages, `analysis/33_descriptive_levels.py`. |
 | Is the change specific to cycling? | Yes. Over 2014–2022, walking did not become less sensitive to rain (cycling minus walking +0.129 log points per decade, 95% CI +0.049 to +0.208). |
 | Do e-bikes explain it? | Not on this evidence. Cold and heat effects did not shrink more than the rain effect, and the change is not larger at the canton counters outside the city. |
 | Do rainy days bring more cars? | No. Car traffic is about **1.5% lower** on wet days, and this has not changed since 2012. It does not rise outside the peak hours either (check added after the results). |

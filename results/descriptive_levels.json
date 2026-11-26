@@ -1,0 +1,64 @@
+{
+  "locations": [
+    "VZS_ANDR",
+    "VZS_BINZ",
+    "VZS_HOFW",
+    "VZS_LUXG",
+    "VZS_MUEH",
+    "VZS_MYTH",
+    "VZS_SCHE",
+    "VZS_SCHU",
+    "VZS_SIHL"
+  ],
+  "definition": "mean daytime count per location, averaged over the nine locations",
+  "early": {
+    "all_days": 613.0602272900705,
+    "dry_days": 708.420897623401,
+    "wet_days": 388.52890506689164,
+    "location_days": 12481,
+    "dry_dates": 892,
+    "wet_dates": 273,
+    "wet_minus_dry": -319.8919925565093,
+    "wet_vs_dry_pct": -45.15564033044167,
+    "dry_tmax_mean": 15.197309417040358,
+    "dry_sun_hours_mean": 6.449251777029555,
+    "wet_tmax_mean": 12.656043956043957,
+    "wet_sun_hours_mean": 1.3203358208955225
+  },
+  "late": {
+    "all_days": 1109.511651559732,
+    "dry_days": 1237.5938332660016,
+    "wet_days": 788.908894340224,
+    "location_days": 12984,
+    "dry_dates": 1127,
+    "wet_dates": 345,
+    "wet_minus_dry": -448.6849389257776,
+    "wet_vs_dry_pct": -36.254619800560995,
+    "dry_tmax_mean": 17.040017746228926,
+    "dry_sun_hours_mean": 7.013383614315291,
+    "wet_tmax_mean": 13.819420289855072,
+    "wet_sun_hours_mean": 1.44256038647343
+  },
+  "change_pct": {
+    "all_days": 80.97922555898647,
+    "dry_days": 74.69753326276252,
+    "wet_days": 103.05024518173246,
+    "fewer_on_wet_day": 40.26138489431457
+  },
+  "original_counters": {
+    "mean_2011_2014": 613.0602272900705,
+    "mean_2017": 830.3890657074787,
+    "growth_pct": 35.449834900899326,
+    "last_day_of_original_counters": {
+      "VZS_ANDR": "2019-01-28",
+      "VZS_BINZ": "2018-03-12",
+      "VZS_HOFW": "2019-03-12",
+      "VZS_LUXG": "2018-12-19",
+      "VZS_MUEH": "2018-08-27",
+      "VZS_MYTH": "2018-12-19",
+      "VZS_SCHE": "2018-12-19",
+      "VZS_SCHU": "2019-03-13",
+      "VZS_SIHL": "2018-12-19"
+    }
+  }
+}
