@@ -17,6 +17,7 @@ Fifteen years of open bicycle, pedestrian and car counts from Zurich, Switzerlan
 | Where did the change happen? | Check added after the results: mostly on routes with much weekend traffic (rain effect weakening +0.108 log points per decade, against +0.038 on commuter-type routes, difference 95% CI -0.094 to -0.046). The gap also holds in proportional terms. |
 | What happens to public transport on wet days? | Check added after the results, one stop (Hardbrücke, 2024–2026): tram and bus flows +1.2% (95% CI -0.3% to +2.6%) while cycling on the same bridge falls by 25%. |
 | Can tomorrow's bike traffic be forecast? | A graph neural network (Graph WaveNet) has 59% less error than "same weekday last week" when tomorrow's weather is known, and 24% less error than the same network without the counter graph. |
+| Do forecasting models go wrong when the rain effect changes? | Companion working paper (`paper_drift/`), tests fixed in `plans/DRIFT_PLAN_2026-11-27.md` before any model was trained. A LightGBM model trained once on 2011–2013 under-predicts wet days compared with dry days by about **10 percentage points** in 2022–2026; models trained from 2014 onwards and models retrained every year do not. Frozen models also lose much of their overall accuracy (error relative to last week's count 0.60–0.91 in 2022–2026, against 0.48 with yearly retraining). |
 
 Rain still removes almost a third of daytime cycling in Zurich. The decline in rain sensitivity is real and specific to cycling, but it is slow.
 
@@ -50,6 +51,7 @@ Daily counts between 6:00 and 20:00 are modelled with Poisson regression. Each c
 | `analysis/` | Every script, in the order they were run (see `analysis/README.md`) |
 | `plans/` | The locked plans, the exact test definitions and all checksums |
 | `results/` | Results summaries, tables (JSON and CSV), figures and forecasts |
+| `paper_drift/` | Companion working paper: forecasting cycling when the weather effect drifts (PDF and LaTeX source) |
 | `tests/` | Automated check of the web app in Microsoft Edge |
 
 ## Run the web app

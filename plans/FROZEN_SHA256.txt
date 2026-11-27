@@ -30,3 +30,7 @@ c3df0ec836a21f152d7736d9ba31e5e6745aa4617309b52863ceaa3fdf3abdfb *docs/CHECK_ROU
 
 Frozen 2026-11-25 16:15:59 +0100 check added after the results, before it was run (cars off-peak, route-type gap in proportional terms)
 b49879b5af87ba49a31540328096274920b73c15d706cd898fe56eb07ae295f3 *docs/CHECK_OFFPEAK_PROPORTIONAL_2026-11-25.md
+
+Frozen 2026-11-27 15:05:30 +0100 drift plan, before any model in it was trained
+352596302f4834b880f794d13bc10f3e3d3cf3376024ed94ecb518496c13ee1e *docs/DRIFT_PLAN_2026-11-27.md
+323e54b151955c9adde022d3befd0e13d56ea1318e4c5e85644a7028b4240c59 *docs/DRIFT_PLAN_2026-11-27.pdf

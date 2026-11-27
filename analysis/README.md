@@ -34,4 +34,7 @@ Every script takes the repository folder as its only argument, for example `pyth
 | `30_route_type_followup.py` | Diagnostics run after seeing the result of `29_route_type.py`: one location dropped at a time, weekend ratio by period |
 | `31_route_type_proportional.py` | Check added after the results, rule fixed in `plans/CHECK_OFFPEAK_PROPORTIONAL_2026-11-25.md` before it was run: the route-type gap in proportional terms |
 | `32_cars_offpeak.py` | Check added after the results, same rule file: car traffic on wet days outside the peak hours and in the rush hours |
+| `40_drift_forecast.py`, `drift_common.py` | Drift study, plan fixed in `plans/DRIFT_PLAN_2026-11-27.md` before any model was trained: frozen and yearly retrained LightGBM models, wet-day bias in every test year 2014–2019 and 2022–2026 |
+| `41_drift_check_counters.py` | Check added after the drift results: all models compared on the same six counters |
+| `42_drift_figure.py` | Figure of the drift working paper |
 | `33_descriptive_levels.py` | Descriptive table: cyclists per counter on all, dry and wet days, 2011–2014 and 2022–2026, at the nine locations of the period design |

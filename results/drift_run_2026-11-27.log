@@ -1,0 +1,32 @@
+check: code/14 stored +0.0301155644 | dense +0.0301155644 | fast +0.0301155644
+frozen W1 2011-2013: 6707 training rows, 6 counters, 21778 test rows
+frozen W2 2014-2016: 11224 training rows, 11 counters, 28435 test rows
+frozen W3 2017-2019: 10697 training rows, 11 counters, 17890 test rows
+frozen W4 2022-2024: 10991 training rows, 11 counters, 7035 test rows
+yearly retrained for 2014: 6707 training rows, 6 counters, 2167 test rows
+yearly retrained for 2015: 10172 training rows, 9 counters, 3192 test rows
+yearly retrained for 2016: 14132 training rows, 11 counters, 3761 test rows
+yearly retrained for 2017: 17931 training rows, 11 counters, 3738 test rows
+yearly retrained for 2018: 21717 training rows, 11 counters, 3724 test rows
+yearly retrained for 2019: 25503 training rows, 11 counters, 3083 test rows
+yearly retrained for 2022: 28628 training rows, 11 counters, 3112 test rows
+yearly retrained for 2023: 31826 training rows, 11 counters, 3721 test rows
+yearly retrained for 2024: 35595 training rows, 11 counters, 4022 test rows
+yearly retrained for 2025: 39619 training rows, 11 counters, 3880 test rows
+yearly retrained for 2026: 43535 training rows, 11 counters, 3155 test rows
+H1: -0.0453 [-0.0742, -0.0127]  prediction: interval below 0  -> supported
+H2: -0.0357 [-0.0484, -0.0228]  prediction: interval below 0  -> supported
+H3: -0.0220 [-0.0473, +0.0002]  prediction: interval includes 0  -> supported
+H4: -0.0095 [-0.0394, +0.0224]  prediction: interval includes 0  -> supported
+described frozen_W1_late: -0.1054 [-0.1383229190711764, -0.07149482433457784]
+described frozen_W2_late: -0.0132 [-0.042834135787540945, 0.022427899946191838]
+described frozen_W3_late: -0.0152 [-0.04600351086852999, 0.016008276969608746]
+described frozen_W4_late: +0.0462 [-0.005285982977020007, 0.10208087415075134]
+earlier models, wet-day bias (19 counters): {'pred_lgbm_wx': 0.0266, 'pred_gwn_wx': 0.0144, 'pred_rnn_wx': 0.0222}
+frozen_W1  on the 6 counters: -0.1054 [-0.1393, -0.0694]
+frozen_W2  on the 6 counters: +0.0036 [-0.0336, +0.0414]
+frozen_W3  on the 6 counters: +0.0029 [-0.0346, +0.0396]
+frozen_W4  on the 6 counters: +0.0664 [+0.0019, +0.1429]
+yearly     on the 6 counters: -0.0008 [-0.0377, +0.0359]
+frozen_W1 minus frozen_W2: -0.1090 [-0.1343, -0.0868]
+frozen_W1 minus frozen_W3: -0.1083 [-0.1297, -0.0875]

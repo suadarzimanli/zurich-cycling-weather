@@ -1,0 +1,466 @@
+{
+  "plan": "docs/DRIFT_PLAN_2026-11-27.md (frozen 2026-11-27 15:05:30 +0100)",
+  "checks": {
+    "code14_reference": 0.030115564350245504,
+    "dense": 0.030115564350245504,
+    "fast": 0.030115564350245566
+  },
+  "tests": {
+    "H1": {
+      "what": "wet-day bias, frozen W1 and W2 pooled, test years 2022-2026",
+      "prediction": "interval below 0",
+      "estimate": -0.045269926032808674,
+      "ci95": [
+        -0.0741735726784089,
+        -0.012723347437811302
+      ],
+      "supported": true
+    },
+    "H2": {
+      "what": "frozen W1 and W2 (pooled) minus yearly retrained, 2022-2026",
+      "prediction": "interval below 0",
+      "estimate": -0.035728943774209716,
+      "ci95": [
+        -0.04837959689474136,
+        -0.02276380030124687
+      ],
+      "supported": true
+    },
+    "H3": {
+      "what": "placebo: frozen W1 minus yearly retrained, 2014-2016",
+      "prediction": "interval includes 0",
+      "estimate": -0.021950366557900718,
+      "ci95": [
+        -0.04729058186421452,
+        0.0002463542731543305
+      ],
+      "supported": true
+    },
+    "H4": {
+      "what": "wet-day bias, yearly retrained, 2022-2026",
+      "prediction": "interval includes 0",
+      "estimate": -0.009540982258598956,
+      "ci95": [
+        -0.03941548524452834,
+        0.02241879249978154
+      ],
+      "supported": true
+    }
+  },
+  "described_pooled": {
+    "H1_frozen_W1W2_late": {
+      "estimate": -0.045269926032808674,
+      "ci95": [
+        -0.0741735726784089,
+        -0.012723347437811302
+      ],
+      "n_wet": 5315,
+      "n_dry": 17255
+    },
+    "yearly_late": {
+      "estimate": -0.009540982258598956,
+      "ci95": [
+        -0.03941548524452834,
+        0.02241879249978154
+      ],
+      "n_wet": 3466,
+      "n_dry": 11263
+    },
+    "H3_frozen_W1_early": {
+      "estimate": -0.015819190838380362,
+      "ci95": [
+        -0.07406950564928087,
+        0.05116496843117347
+      ],
+      "n_wet": 1198,
+      "n_dry": 4025
+    },
+    "yearly_early": {
+      "estimate": 0.006131175719520357,
+      "ci95": [
+        -0.04299970588257303,
+        0.06253942798055658
+      ],
+      "n_wet": 1736,
+      "n_dry": 5708
+    },
+    "frozen_W1_late": {
+      "estimate": -0.10538455431603051,
+      "ci95": [
+        -0.1383229190711764,
+        -0.07149482433457784
+      ],
+      "n_wet": 1849,
+      "n_dry": 5992
+    },
+    "frozen_W2_late": {
+      "estimate": -0.013215401106488944,
+      "ci95": [
+        -0.042834135787540945,
+        0.022427899946191838
+      ],
+      "n_wet": 3466,
+      "n_dry": 11263
+    },
+    "frozen_W3_late": {
+      "estimate": -0.015228253175870145,
+      "ci95": [
+        -0.04600351086852999,
+        0.016008276969608746
+      ],
+      "n_wet": 3466,
+      "n_dry": 11263
+    },
+    "frozen_W4_late": {
+      "estimate": 0.04621976857365432,
+      "ci95": [
+        -0.005285982977020007,
+        0.10208087415075134
+      ],
+      "n_wet": 1192,
+      "n_dry": 4626
+    }
+  },
+  "accuracy_vs_last_week": {
+    "frozen_W1 | 2014-2019": {
+      "all": 0.5347143893875745,
+      "wet": 0.42689399639520403,
+      "dry": 0.5905625373099285
+    },
+    "frozen_W2 | 2014-2019": {
+      "all": 0.4232253376692468,
+      "wet": 0.3717490029703352,
+      "dry": 0.4571169538873542
+    },
+    "yearly | 2014-2019": {
+      "all": 0.4063461308125731,
+      "wet": 0.3589414804416337,
+      "dry": 0.4312784487801852
+    },
+    "frozen_W1 | 2022-2026": {
+      "all": 0.9120676656820659,
+      "wet": 0.6839660133089493,
+      "dry": 0.9900203335432735
+    },
+    "frozen_W2 | 2022-2026": {
+      "all": 0.6414531549837011,
+      "wet": 0.49443820303812236,
+      "dry": 0.6933358074193436
+    },
+    "frozen_W3 | 2022-2026": {
+      "all": 0.5996475104273925,
+      "wet": 0.4539167452529755,
+      "dry": 0.6519286656608411
+    },
+    "frozen_W4 | 2022-2026": {
+      "all": 0.43132793547701637,
+      "wet": 0.33144425018337553,
+      "dry": 0.4483923894397475
+    },
+    "yearly | 2022-2026": {
+      "all": 0.4763381033531301,
+      "wet": 0.39140201714545403,
+      "dry": 0.4975390107904698
+    }
+  },
+  "earlier_models_wet_day_bias_19_counters": {
+    "pred_lgbm_wx": 0.02662626058120307,
+    "pred_gwn_wx": 0.014411401972852655,
+    "pred_rnn_wx": 0.02220899141415192
+  },
+  "models": {
+    "frozen_W1": {
+      "train_years": [
+        2011,
+        2013
+      ],
+      "train_rows": 6707,
+      "counters": [
+        "VZS_HOFW",
+        "VZS_LUXG",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL"
+      ]
+    },
+    "frozen_W2": {
+      "train_years": [
+        2014,
+        2016
+      ],
+      "train_rows": 11224,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "frozen_W3": {
+      "train_years": [
+        2017,
+        2019
+      ],
+      "train_rows": 10697,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "frozen_W4": {
+      "train_years": [
+        2022,
+        2024
+      ],
+      "train_rows": 10991,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2014": {
+      "train_years": [
+        2011,
+        2013
+      ],
+      "train_rows": 6707,
+      "counters": [
+        "VZS_HOFW",
+        "VZS_LUXG",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL"
+      ]
+    },
+    "yearly_2015": {
+      "train_years": [
+        2011,
+        2014
+      ],
+      "train_rows": 10172,
+      "counters": [
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2016": {
+      "train_years": [
+        2011,
+        2015
+      ],
+      "train_rows": 14132,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2017": {
+      "train_years": [
+        2011,
+        2016
+      ],
+      "train_rows": 17931,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2018": {
+      "train_years": [
+        2011,
+        2017
+      ],
+      "train_rows": 21717,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2019": {
+      "train_years": [
+        2011,
+        2018
+      ],
+      "train_rows": 25503,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2022": {
+      "train_years": [
+        2011,
+        2021
+      ],
+      "train_rows": 28628,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2023": {
+      "train_years": [
+        2011,
+        2022
+      ],
+      "train_rows": 31826,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2024": {
+      "train_years": [
+        2011,
+        2023
+      ],
+      "train_rows": 35595,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2025": {
+      "train_years": [
+        2011,
+        2024
+      ],
+      "train_rows": 39619,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    },
+    "yearly_2026": {
+      "train_years": [
+        2011,
+        2025
+      ],
+      "train_rows": 43535,
+      "counters": [
+        "VZS_BUCH",
+        "VZS_HOFW",
+        "VZS_LANN",
+        "VZS_LIMC",
+        "VZS_LUXG",
+        "VZS_MILI",
+        "VZS_MUEH",
+        "VZS_MYTH",
+        "VZS_SCHE",
+        "VZS_SIHL",
+        "VZS_TOED"
+      ]
+    }
+  },
+  "bootstrap": {
+    "draws": 2000,
+    "seed": 2026,
+    "unit": "ISO week"
+  }
+}

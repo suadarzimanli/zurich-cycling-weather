@@ -6,7 +6,7 @@ authors:
   - family-names: Arzimanli
     given-names: Suad
     affiliation: "University of Łódź"
-version: 1.0.0
+version: 1.1.0
 doi: 10.5281/zenodo.24589808
 date-released: 2026-11-27
 license: MIT
@@ -32,4 +32,8 @@ abstract: >-
   traffic is about 1.5% lower on wet days with no change since 2012. The
   repository also contains next-day forecasts of bike counts with a graph neural
   network (Graph WaveNet), LightGBM and a recurrent network. A paper based on
-  this work is under review at a peer-reviewed journal.
+  this work is under review at a peer-reviewed journal. Version 1.1.0 adds a
+  companion working paper on forecasting when the weather effect drifts:
+  a model trained once on 2011–2013 under-predicts wet days by about ten
+  percentage points a decade later, while models trained from 2014 onwards
+  and models retrained every year do not.
