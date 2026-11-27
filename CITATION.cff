@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Is cycling in Zurich becoming weather-proof? Fifteen years of bicycle, pedestrian and car counts"
+title: "Zurich cycling and weather: code, data and web app for a fifteen-year study of rain and bicycle, pedestrian and car counts"
 message: "If you use this software, data or study, please cite it as below."
 type: software
 authors:
@@ -7,7 +7,7 @@ authors:
     given-names: Suad
     affiliation: "University of Łódź"
 version: 1.0.0
-date-released: 2026-11-24
+date-released: 2026-11-27
 license: MIT
 repository-code: "https://github.com/suadarzimanli/zurich-cycling-weather"
 url: "https://suadarzimanli.github.io/zurich-cycling-weather/"
@@ -20,3 +20,15 @@ keywords:
   - Poisson regression
   - graph neural networks
   - forecasting
+abstract: >-
+  Code, derived data and an interactive web app for a study of how the effect of
+  rain on cycling in Zurich changed between 2011 and 2026. Open bicycle,
+  pedestrian and car counts from the City and Canton of Zurich are joined with
+  MeteoSwiss weather and analysed with Poisson regressions with fixed effects;
+  the analysis plans and their predictions were fixed with checksums before the
+  corresponding analyses. A wet day removed 33% of daytime cyclists in 2011–2014
+  and 29% in 2022–2026, walking did not become less sensitive to rain, and car
+  traffic is about 1.5% lower on wet days with no change since 2012. The
+  repository also contains next-day forecasts of bike counts with a graph neural
+  network (Graph WaveNet), LightGBM and a recurrent network. A paper based on
+  this work is under review at a peer-reviewed journal.
