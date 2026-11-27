@@ -82,7 +82,7 @@ The six Graph WaveNet runs take 45 to 100 minutes each on a CPU. Their outputs a
 
 Code: MIT licence (see `LICENSE`). Derived results: CC BY 4.0. The underlying data keep the licences of their sources listed above.
 
-Please cite the repository using `CITATION.cff`. A Zenodo DOI will be added.
+Please cite the repository as: Arzimanli, S. (2026). *Zurich cycling and weather: code, data and web app for a fifteen-year study of rain and bicycle, pedestrian and car counts*. Zenodo. https://doi.org/10.5281/zenodo.24589808 (this DOI always points to the latest version; details in `CITATION.cff`).
 
 ## Author
 
